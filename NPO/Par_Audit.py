@@ -14,12 +14,12 @@
 #     name: python3
 # ---
 
-# # # Parameter - Audit
+# # Parameter - Audit
 
 
 #  [boxplot](http://www.math.wpi.edu/saspdf/stat/chap18.pdf)
-#  http://wresch.github.io/2013/03/08/asinh-scales-in-ggplot2.html
-#  https://stackoverflow.com/questions/37446064/i-need-ggplot-scale-x-log10-to-give-me-both-negative-and-positive-numbers-as-o
+#  [git](http://wresch.github.io/2013/03/08/asinh-scales-in-ggplot2.html)
+#  [stack](https://stackoverflow.com/questions/37446064/i-need-ggplot-scale-x-log10-to-give-me-both-negative-and-positive-numbers-as-o)
 
 # +
 # def visual(df, st):
@@ -30,16 +30,14 @@
     
     
 #     ggplot(stack(df), aes(x = ind, y = values)) + geom_boxplot()
+# -
 
 
-# +
 import numpy as np
 from plotnine import *
 import pandas as pd
 from mizani.transforms import trans
-
 # %matplotlib inline
-# -
 
 
 def cleanIparm(ruta, pfile, dcol, df, st):
@@ -233,16 +231,15 @@ custom_axis = theme(axis_text_x = element_text(color="grey", size=6, angle=90, h
                     figure_size=(5 * 4, 3.5 * 4) 
                     ) 
 # ggplot code
-(
-    ggplot(data = result, mapping = aes(x='parameter', y='value')) + geom_boxplot() +
+my_plot = (ggplot(data = result, mapping = aes(x='parameter', y='value')) + geom_boxplot() +
     # value 'concat' is placed in coordinate (parameter, stddev), 
     geom_text(data= st, mapping = aes(x='parameter', y='StdDev', label='concat'), 
               color = 'red', va = 'top', ha = 'left', size = 7, nudge_x=.6, nudge_y=-1.5) + 
     facet_wrap('counter', scales = 'free') + custom_axis + scale_y_continuous(trans=asinh_trans) + 
     ylab("Values") + xlab("Parameters") + labs(title="Parameter Distribution Audit UMTS") + 
-    coord_flip()
-)
-
+    coord_flip())
+my_plot.save("scatterplot.png", width=20, height=10, dpi=300)
+my_plot
 
 # # + scale_y_continuous(trans=asinh_trans, breaks=[-100,-50,-10,-1,0,1,10,50,100]))
 
