@@ -212,6 +212,7 @@ def pntopd(file, figs, x, y, wi, he):
 
 
 def par_aud(ruta, datb, tablas, tipo):
+    from mizani.transforms import trans
     import numpy as np
     from pyexcelerate import Workbook
     from pyexcelerate_to_excel import pyexcelerate_to_excel
@@ -259,14 +260,14 @@ def par_aud(ruta, datb, tablas, tipo):
                     elif line == 'WBTS':
                         df = pd.read_sql_query("select * from WBTS_Full1;", conn, index_col=['WBTSName', 'Prefijo'])
                     elif line == 'LNCEL':
-                        if carr == 'Lall':
+                        if carr == 'all':
                             df = pd.read_sql_query("select * from LNCEL_Full;", conn, index_col=['LNCELname', 'Prefijo'])
                         else:
                             df = pd.read_sql_query("select * from LNCEL_Full where (earfcnDL = " + str(carr) + ");",
                                                    conn, index_col=['LNCELname', 'Prefijo'])
                         df = df.dropna(subset=['Banda'])   # drop rows with band nan
                     elif line == 'WCEL':
-                        if carr == 'Uall':
+                        if carr == 'all':
                             df = pd.read_sql_query("select * from WCEL_FULL1;", conn, index_col=['WCELName', 'Prefijo'])
                         else:
                             df = pd.read_sql_query("select * from WCEL_FULL1 where (UARFCN = " + str(carr) + ");",

@@ -24,10 +24,10 @@
 #
 
 
-from rfpack.validatabc import validatab
 from plotnine import *
 from mizani.transforms import trans
 import numpy as np
+from rfpack.validatabc import validatab
 
 
 def statzon(df):
@@ -65,13 +65,13 @@ def znfrmt(seq):
     }
     return switcher.get(seq, 'nothing')
 
-
-def percentile(n):
-    def percentile_(x):
-        return np.percentile(x, n)
-    percentile_.__name__ = 'percentile_%s' % n
-    return percentile_
-
+# +
+# def percentile(n):
+#     def percentile_(x):
+#         return np.percentile(x, n)
+#     percentile_.__name__ = 'percentile_%s' % n
+#     return percentile_
+# -
 
 def par_audit(df):
     import functools
@@ -354,7 +354,7 @@ def customparam(ruta, datb, tab_par):
     for index, row in consfull.iterrows():  # table row iteration by Prefijo column type
         if row['Prefijo'] in znfrmt(0):
             consfull.loc[index, 'prorder'] = 0  # update column with print order id
-        elif row['Prefijo'] in znfrmt(1):       # 3 regions per plot print
+        elif row['Prefijo'] in znfrmt(1):
             consfull.loc[index, 'prorder'] = 1
         elif row['Prefijo'] in znfrmt(2):
             consfull.loc[index, 'prorder'] = 2

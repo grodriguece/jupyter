@@ -13,12 +13,12 @@
 #     name: python3
 # ---
 
+# # ctoq() save transposed table column names in csv file
+
 import pandas as pd
 import sqlite3
 from pathlib import Path
 
-
-# ctoq() save transposed table column names in csv file
 
 def ctoq(ruta, datb, table):
     dat_dir = Path(ruta)
@@ -33,6 +33,6 @@ def ctoq(ruta, datb, table):
     conn.close()    
 
 
-ctoq("C:/SQLite", "20200522_sqlite.db", 'WCEL')
+ctoq("C:/SQLite", "20200522_sqlite.db", 'UFFIM')
 
 
